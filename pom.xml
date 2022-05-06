@@ -36,6 +36,12 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- A library that helps to generate API documentation. This will automatically deploy swagger-ui to a spring-boot application. -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.8</version>
+		</dependency>
 
         <!-- Tests Dependencies -->
         <dependency>
