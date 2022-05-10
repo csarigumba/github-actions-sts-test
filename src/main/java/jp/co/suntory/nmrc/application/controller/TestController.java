@@ -1,7 +1,6 @@
 package jp.co.suntory.nmrc.application.controller;
 
 import javax.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -28,8 +26,8 @@ public class TestController {
     @GetMapping
     @Operation(description = "SearchAPI - Test Search API")
     @ApiResponses(value = {
-    		@ApiResponse(responseCode = "400", description = "Invalid parameter."),
-    		@ApiResponse(responseCode = "404", description = "The requested resource doesn't exist.")
+            @ApiResponse(responseCode = "400", description = "Invalid parameter."),
+            @ApiResponse(responseCode = "404", description = "The requested resource doesn't exist.")
     })
     @ResponseStatus(HttpStatus.OK)
     public String search(@RequestParam(required = false, name = "optionalParam") String optionalParam,
@@ -40,7 +38,7 @@ public class TestController {
     @GetMapping("/{id}")
     @Operation(description = "ViewAPI - Test View API")
     @ApiResponses(value = {
-    		@ApiResponse(responseCode = "400", description = "Invalid parameter."),
+            @ApiResponse(responseCode = "400", description = "Invalid parameter."),
     })
     @ResponseStatus(HttpStatus.OK)
     public String view(@PathVariable final int id) {
@@ -53,8 +51,8 @@ public class TestController {
     @PostMapping
     @Operation(description = "SaveAPI - Test Save API")
     @ApiResponses(value = {
-    		@ApiResponse(responseCode = "400", description = "Invalid parameter."),
-    		@ApiResponse(responseCode = "404", description = "The requested resource doesn't exist.")
+            @ApiResponse(responseCode = "400", description = "Invalid parameter."),
+            @ApiResponse(responseCode = "404", description = "The requested resource doesn't exist.")
     })
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody @Valid TestRequest request) {
@@ -64,9 +62,9 @@ public class TestController {
     @PutMapping
     @Operation(description = "UpdateAPI - Test Update API")
     @ApiResponses(value = {
-    		@ApiResponse(responseCode = "204", description = "The requested resource was successfully updated."),
-    		@ApiResponse(responseCode = "400", description = "Invalid parameter.")
-    })    
+            @ApiResponse(responseCode = "204", description = "The requested resource was successfully updated."),
+            @ApiResponse(responseCode = "400", description = "Invalid parameter.")
+    })
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody @Valid TestRequest request) {
         System.out.println("Test Update request: " + request);
@@ -75,10 +73,10 @@ public class TestController {
     @DeleteMapping("/{id}")
     @Operation(description = "DeleteAPI - Test Delete API")
     @ApiResponses(value = {
-    		@ApiResponse(responseCode = "204", description = "The requested resource was successfully deleted."),
-    		@ApiResponse(responseCode = "400", description = "Invalid parameter."),
-    		@ApiResponse(responseCode = "404", description = "The requested resource doesn't exist.")
-    })    
+            @ApiResponse(responseCode = "204", description = "The requested resource was successfully deleted."),
+            @ApiResponse(responseCode = "400", description = "Invalid parameter."),
+            @ApiResponse(responseCode = "404", description = "The requested resource doesn't exist.")
+    })
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable final int id) {
         System.out.println("Test Delete: id = " + id);
