@@ -16,12 +16,20 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jp.co.suntory.nmrc.application.resource.TestRequest;
+import jp.co.suntory.nmrc.application.resource.TestObjectRequest;
+import jp.co.suntory.nmrc.domain.object.TestObject;
+import jp.co.suntory.nmrc.domain.service.TestObjectService;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/v1/test")
 @Tag(name = "Test API")
+@RequiredArgsConstructor
 public class TestController {
+    
+    @NonNull
+    private final TestObjectService testObjectService;
 
     @GetMapping
     @Operation(description = "SearchAPI - Test Search API")
@@ -55,8 +63,9 @@ public class TestController {
             @ApiResponse(responseCode = "404", description = "The requested resource doesn't exist.")
     })
     @ResponseStatus(HttpStatus.CREATED)
-    public void save(@RequestBody @Valid TestRequest request) {
+    public TestObject save(@RequestBody @Valid TestObjectRequest request) {
         System.out.println("Test Save request: " + request);
+        return testObjectService.save(request.toDomainObject());        
     }
 
     @PutMapping
@@ -66,7 +75,7 @@ public class TestController {
             @ApiResponse(responseCode = "400", description = "Invalid parameter.")
     })
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody @Valid TestRequest request) {
+    public void update(@RequestBody @Valid TestObjectRequest request) {
         System.out.println("Test Update request: " + request);
     }
 

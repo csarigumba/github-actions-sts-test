@@ -20,6 +20,8 @@
 
     <properties>
         <java.version>11</java.version>
+        <mybatis.version>2.2.2</mybatis.version>
+        <springdoc.version>1.6.8</springdoc.version>
     </properties>
 
     <dependencies>
@@ -40,16 +42,26 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <dependency>
+		    <groupId>org.mybatis.spring.boot</groupId>
+		    <artifactId>mybatis-spring-boot-starter</artifactId>
+		    <version>${mybatis.version}</version>
+		</dependency>
         
         <!-- A library that helps to generate API documentation. This will automatically deploy swagger-ui to a spring-boot application. -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.6.8</version>
+			<version>${springdoc.version}</version>
 		</dependency>
 		
 
         <!-- Tests Dependencies -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter-test</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
