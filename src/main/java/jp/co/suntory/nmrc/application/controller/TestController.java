@@ -21,11 +21,13 @@ import jp.co.suntory.nmrc.domain.object.TestObject;
 import jp.co.suntory.nmrc.domain.service.TestObjectService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/v1/test")
 @Tag(name = "Test API")
 @RequiredArgsConstructor
+@Slf4j
 public class TestController {
     
     @NonNull
@@ -40,6 +42,7 @@ public class TestController {
     @ResponseStatus(HttpStatus.OK)
     public String search(@RequestParam(required = false, name = "optionalParam") String optionalParam,
             @RequestParam(name = "requiredParam") String requiredParam) {
+        log.info("Test Search API");
         return String.format("Test Search: optionalParam=%s, requiredParam=%s", optionalParam, requiredParam);
     }
 
@@ -50,6 +53,7 @@ public class TestController {
     })
     @ResponseStatus(HttpStatus.OK)
     public String view(@PathVariable final int id) {
+        log.info("Test View API");
         return "Test View: id = " + id;
     }
 
@@ -64,7 +68,7 @@ public class TestController {
     })
     @ResponseStatus(HttpStatus.CREATED)
     public TestObject save(@RequestBody @Valid TestObjectRequest request) {
-        System.out.println("Test Save request: " + request);
+        log.info("Test Save API");
         return testObjectService.save(request.toDomainObject());        
     }
 
@@ -76,7 +80,7 @@ public class TestController {
     })
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody @Valid TestObjectRequest request) {
-        System.out.println("Test Update request: " + request);
+        log.info("Test Update API");
     }
 
     @DeleteMapping("/{id}")
@@ -88,6 +92,6 @@ public class TestController {
     })
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable final int id) {
-        System.out.println("Test Delete: id = " + id);
+        log.info("Test Delete API");
     }
 }
