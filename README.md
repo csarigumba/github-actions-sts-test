@@ -13,7 +13,7 @@ For Nomurec
 - As alternative option, you can use docker to avoid MySQL version conflicts between projects.
 - See. https://ap-northeast-1.console.aws.amazon.com/codesuite/codecommit/repositories/nmrc-api/browse/refs/heads/master/--/docker?region=ap-northeast-1
 
-  1.4 Download [Lombok](https://projectlombok.org/download) jar. To install, double click the jar file and point to your IDE of choice when prompted.
+1.4 Download [Lombok](https://projectlombok.org/download) jar. To install, double click the jar file and point to your IDE of choice when prompted.
 
 
 ## 2. API Setup
@@ -62,11 +62,30 @@ Run the flyway migration scripts to initialize your local database.
 5.3 It will show the same terminal output when running the API via Command line.
 
 ## 6. Verify API is running
-6.1 Open http://localhost:8081/swagger-ui.html on your browser.
+6.1 Open http://localhost:8080/swagger-ui.html on your browser.
 
 ## 7. Testing
 
 5.1 run the command `mvn test`
+
+## Create Docker image locally for dev
+1. Edit `src/main/resources/application-dev.properties` parameters based on your local setup when needed. By default, dev properties are already pre-configured and you may leave it as it is.
+2. Go to the project's root directory, run the command `docker build -f dev.Dockerfile -t nomurec:latest .`
+3. Create a docker container an run it using this command, `docker run --name=nmrc-api -p8080:8080  nomurec:latest`
+4. Open http://localhost:8080/swagger-ui.html on your browser to verify the application.
+
+## Create Docker image locally for prod
+
+1. Edit `src/main/resources/application-prod.properties` parameters based on your local setup when needed.<br>
+TODO : See. application.proerties configuration sheet.
+
+2. Go to the project's root directory, run the command `docker build -f prod.Dockerfile -t nomurec:latest .`
+
+3. Create a docker container an run it using this command, `docker run --name=nmrc-api -p8080:8080  nomurec:latest`
+
+4. Open http://localhost:8080/swagger-ui.html on your browser to verify the application.
+
+
 
 ## Github Actions (Deploy Flow)
 - TODO: 
