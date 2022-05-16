@@ -20,7 +20,7 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI springShopOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title(appName).description("My Data Center API").version(appVersion));
+                .info(new Info().title(appName).description("Nomurec API").version(appVersion));
     }
 
 }

@@ -1,5 +1,4 @@
-# My Data Center API on Docker
-For Nomurec
+# Nomurec API on Docker
 
 ## 1. Local Environment Setup
 

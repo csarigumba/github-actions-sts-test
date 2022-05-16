@@ -1,6 +1,5 @@
-# My Data Center API
+# Nomurec API
 
-For Nomurec
 
 ## 1. Local Environment Setup
 

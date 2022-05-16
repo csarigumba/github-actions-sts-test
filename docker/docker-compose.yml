@@ -10,14 +10,14 @@ services:
       # - ./mysql/data:/var/lib/mysql
     working_dir: /usr/src/app
     ports:
-      - 3307:3306
+      - 3306:3306
     environment:
       - TZ=Asia/Tokyo
       - MYSQL_DATABASE=nomurec
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_ROOT_PASSWORD=
-      - MYSQL_USER=appuser
-      - MYSQL_PASSWORD=65yKFuZJ^cSF
+      - MYSQL_USER=
+      - MYSQL_PASSWORD=
     restart: 'no'
 volumes:
   mysql_data:
