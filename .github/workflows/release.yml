@@ -21,6 +21,7 @@ jobs:
       - name: Set environment profile
         run: |
           branch="$(echo $GITHUB_REF | cut -d'/' -f 3)"
+          echo $branch
           if [ $branch == 'dev']; then
               echo "It is dev environment"
               echo "PROFILE=dev" >> "$GITHUB_ENV"
