@@ -20,13 +20,13 @@ jobs:
         
       - name: Set environment profile
         run: |
-          branch=$(echo $GITHUB_REF | cut -d'/' -f 3)
-          if [[ $branch == 'dev']]; then
+          branch="$(echo $GITHUB_REF | cut -d'/' -f 3)"
+          if [ $branch == 'dev']; then
               echo "It is dev environment"
-            echo "PROFILE=dev" >> "$GITHUB_ENV"
-            echo "IAM_ROLE_ARN=arn:aws:iam::441196140625:role/ced-rnd-s3-role" >> "$GITHUB_ENV"
+              echo "PROFILE=dev" >> "$GITHUB_ENV"
+              echo "IAM_ROLE_ARN=arn:aws:iam::441196140625:role/ced-rnd-s3-role" >> "$GITHUB_ENV"
           else
-            echo "NEED=false" >> "$GITHUB_ENV"
+              echo "NEED=false" >> "$GITHUB_ENV"
           fi
         
       - name: Test
