@@ -3,7 +3,8 @@ name: Upload artifacts to AWS S3
 on:
   push:
     # Trigger if there are changes in dev, stg, and prd branches
-    branches: [dev, stg, prd]
+    # Remove main
+    branches: [dev, stg, prd, main]
 
 jobs:
   deploy:
