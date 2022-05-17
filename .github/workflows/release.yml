@@ -27,12 +27,13 @@ jobs:
               echo "PROFILE=dev" >> "$GITHUB_ENV"
               echo "IAM_ROLE_ARN=arn:aws:iam::441196140625:role/ced-rnd-s3-role" >> "$GITHUB_ENV"
           else
-              echo "NEED=false" >> "$GITHUB_ENV"
+              echo "Invalid environment."
+              echo "PROFILE=null" >> "$GITHUB_ENV"
+              echo "IAM_ROLE_ARN=null" >> "$GITHUB_ENV"
           fi
         
       - name: Test
         run: |
-          echo $NEED
           echo $PROFILE
           echo $IAM_ROLE_ARN
           
