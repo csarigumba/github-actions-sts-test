@@ -21,15 +21,12 @@ jobs:
       - name: Set environment profile
         run: |
           branch="$(echo $GITHUB_REF | cut -d'/' -f 3)"
-          echo $branch
           if [ $branch = 'dev' ]; then
-              echo "It is dev environment"
               echo "PROFILE=dev" >> "$GITHUB_ENV"
               echo "IAM_ROLE_ARN=arn:aws:iam::441196140625:role/ced-rnd-s3-role" >> "$GITHUB_ENV"
-          else
-              echo "Invalid environment."
-              echo "PROFILE=null" >> "$GITHUB_ENV"
-              echo "IAM_ROLE_ARN=null" >> "$GITHUB_ENV"
+          elif [ $branch = 'stg' ]; then
+              echo "PROFILE=stg" >> "$GITHUB_ENV"
+              echo "IAM_ROLE_ARN=arn:aws:iam::441196140625:role/ced-rnd-stg-s3-role" >> "$GITHUB_ENV"
           fi
         
       - name: Configure AWS credentials
