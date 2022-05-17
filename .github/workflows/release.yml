@@ -31,5 +31,5 @@ jobs:
         
       - name: Test
         run: |
-          echo $PROFILE
-          echo $IAM_ROLE_ARN
+          echo $env.PROFILE
+          echo $env.IAM_ROLE_ARN
