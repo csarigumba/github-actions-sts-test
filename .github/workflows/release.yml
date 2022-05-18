@@ -1,0 +1,52 @@
+name: Upload artifacts to AWS S3
+
+on:
+  push:
+    # Trigger if there are changes in dev, stg, and prd branches
+    branches: [dev, stg, prd]
+permissions:
+  id-token: write
+  contents: read # This is required for actions/checkout
+
+jobs:
+  deploy:
+    name: Upload to AWS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v3
+
+      - name: Set environment profile
+        run: |
+          branch="$(echo $GITHUB_REF | cut -d'/' -f 3)"
+          if [ $branch = 'dev' ]; then
+              echo "PROFILE=dev" >> "$GITHUB_ENV"
+              echo "IAM_ROLE_ARN=${{ secrets.CI_DEV_DEPLOY_IAM_ROLE }}" >> "$GITHUB_ENV"
+          elif [ $branch = 'stg' ]; then
+              echo "PROFILE=stg" >> "$GITHUB_ENV"
+              echo "IAM_ROLE_ARN=${{ secrets.CI_STG_DEPLOY_IAM_ROLE }}" >> "$GITHUB_ENV"
+          elif [ $branch = 'prd' ]; then
+              echo "PROFILE=prd" >> "$GITHUB_ENV"
+              echo "IAM_ROLE_ARN=${{ secrets.CI_PRD_DEPLOY_IAM_ROLE }}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ap-northeast-1
+          role-to-assume: ${{env.IAM_ROLE_ARN}}
+          role-duration-seconds: 900
+          role-session-name: GitHubActions-${{ github.run_id }}
+
+      - name: Zip artifacts
+        uses: thedoctor0/zip-release@master
+        with:
+          type: "zip"
+          filename: "src.zip"
+          exclusions: "*.git* /*target/*"
+
+      - name: Upload to AWS S3
+        run: |
+          echo "Uploading artifacts to $env.PROFILE environment."
+          aws s3 cp src.zip s3://nmrc-${{env.PROFILE}}-cicd-bucket/${{ secrets.CI_PROJECT_NAME }}/
