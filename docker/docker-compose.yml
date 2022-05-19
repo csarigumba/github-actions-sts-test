@@ -1,23 +1,19 @@
-version: '3.1'
+version: "3.1"
 services:
   nmrc-mysql:
     container_name: nmrc-mysql
     image: mysql:8.0.29
-    command: --default-authentication-plugin=mysql_native_password
+    command: --default-authentication-plugin=mysql_native_password --sql_mode=""
     volumes:
       - ./mysql/docker.cnf:/etc/mysql/conf.d/docker.cnf
-      - mysql_data:/var/lib/mysql
-      # - ./mysql/data:/var/lib/mysql
     working_dir: /usr/src/app
     ports:
-      - 3306:3306
+      - 13306:3306
     environment:
       - TZ=Asia/Tokyo
       - MYSQL_DATABASE=nomurec
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_ROOT_PASSWORD=
-      - MYSQL_USER=
-      - MYSQL_PASSWORD=
-    restart: 'no'
-volumes:
-  mysql_data:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=appuser
+      - MYSQL_PASSWORD=appuser
+    restart: "no"

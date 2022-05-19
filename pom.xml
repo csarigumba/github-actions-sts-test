@@ -123,6 +123,7 @@
 				<DB_USER>Add USER from command line</DB_USER>
 				<DB_PASSWORD>Add PASSWORD from command line</DB_PASSWORD>
 				<DB_PORT>Add PORT from command line</DB_PORT>
+				
 			</properties>
 		</profile>
 	</profiles>

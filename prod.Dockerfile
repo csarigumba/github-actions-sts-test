@@ -8,9 +8,9 @@ WORKDIR /opt/nmrc-api-build
 COPY src/ ./src
 COPY pom.xml .
 
-RUN mvn package -Pprod -DskipTests=true
+# RUN mvn package -Pprod -DskipTests=true -DDB_HOST={DB_HOST} -DDB_USER={DB_USER} -DDB_PASSWORD={DB_PASSWORD} -DDB_PORT={DB_PORT}
 
-##Run mvn package -Pprod -DDB_HOST=host.docker.internal -DDB_USER=dbuser -DDB_PASSWORD=password -DDB_PORT=3309
+RUN mvn package -Pprod -DskipTests=true -DDB_HOST=database-1.cluster-cddsbjzmznfy.ap-northeast-1.rds.amazonaws.com -DDB_USER=admin -DDB_PASSWORD=abcdefghi -DDB_PORT=3306
 
 ############
 # application
@@ -22,7 +22,7 @@ WORKDIR /opt/nmrc-api
 ENV TZ=Asia/Tokyo
 
 COPY --from=builder /opt/nmrc-api-build/target/nomurec-1.0.jar .
-COPY --from=builder /opt/nmrc-api-build/src/main/resources/ ./src/main/resources
+COPY --from=builder /opt/nmrc-api-build/target/classes ./src/main/resources
 COPY --from=builder /opt/nmrc-api-build/pom.xml .
 COPY scripts/ ./scripts
 
