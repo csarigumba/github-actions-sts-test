@@ -20,15 +20,13 @@ WORKDIR /opt/nmrc-api
 ENV TZ=Asia/Tokyo
 
 COPY --from=builder /opt/nmrc-api-build/target/nomurec-1.0.jar .
-COPY --from=builder /opt/nmrc-api-build/target/classes ./src/main/resources
+RUN jar xf nomurec-1.0.jar BOOT-INF/classes/application-prod.properties
 COPY --from=builder /opt/nmrc-api-build/pom.xml .
 COPY scripts/ ./scripts
 
 # Download flyway-plugin
-RUN mvn -Dflyway.configFiles=src/main/resources/application-prod.properties flyway:info; exit 0
+RUN mvn -Dflyway.configFiles=BOOT-INF/classes/application-prod.properties flyway:info; exit 0
 
 EXPOSE 8080
 
-RUN chmod +x scripts/entrypoint_prod.sh
-
-ENTRYPOINT ["scripts/entrypoint_prod.sh"]
+ENTRYPOINT ["sh", "scripts/entrypoint_prod.sh"]
