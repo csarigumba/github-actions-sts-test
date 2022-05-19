@@ -29,4 +29,6 @@ RUN mvn -Dflyway.configFiles=src/main/resources/application-prod.properties flyw
 
 EXPOSE 8080
 
+RUN chmod +x scripts/entrypoint_prod.sh
+
 ENTRYPOINT ["scripts/entrypoint_prod.sh"]
