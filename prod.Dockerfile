@@ -10,8 +10,6 @@ COPY pom.xml .
 
 RUN mvn package -Pprod -DskipTests=true -DDB_HOST={DB_HOST} -DDB_USER={DB_USER} -DDB_PASSWORD={DB_PASSWORD} -DDB_PORT={DB_PORT}
 
-# RUN mvn package -Pprod -DskipTests=true -DDB_HOST=database-1.cluster-cddsbjzmznfy.ap-northeast-1.rds.amazonaws.com -DDB_USER=admin -DDB_PASSWORD=abcdefghi -DDB_PORT=3306
-
 ############
 # application
 ############
